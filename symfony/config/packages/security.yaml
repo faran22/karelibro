@@ -1,0 +1,88 @@
+security:
+    
+
+    #------------------------------------------------------------------------------------ ustawienia
+    # https://symfony.com/doc/current/security/experimental_authenticators.html
+    enable_authenticator_manager: true
+    password_hashers:
+        App\Entity\User:
+            algorithm: bcrypt
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+
+
+            
+            
+            
+            
+
+    #------------------------------------------------------------------------------------ usługi
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                #property: email
+                property: username
+
+
+
+                
+                
+                
+                
+                
+                
+                
+                
+    #------------------------------------------------------------------------------------ konfiguracja firewall
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\AppAuthenticator
+            logout:
+                path: /logout
+                target: '/login'
+            
+
+        
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    #------------------------------------------------------------------------------------ role hierarchy
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+
+            
+            
+            
+            
+            
+            
+            
+    #------------------------------------------------------------------------------------ dostępy
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

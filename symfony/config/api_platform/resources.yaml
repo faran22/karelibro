@@ -1,0 +1,22 @@
+#resources:
+#    App\Entity\User:
+#        collectionOperations:
+#            get:
+#                filters: ['App\Filters\RestrictGroupFilter']
+    #    filters: ['driver.custom_search_filter']
+    #    shortName: 'Offer'
+    #    description: 'An offer from my shop'
+        #iri: 'http://schema.org/Offer'
+        #attributes:
+        #    route_prefix: /library
+        #    pagination_items_per_page: 24    # optional
+        #collectionOperations:
+        #    #get: ~ # nothing more to add if we want to keep the default controller
+        #    post: ~
+        #itemOperations:
+        #    get:
+                #schemes: ['https']
+                #method: 'GET'
+                #path: '/grimoire/{id}/as'
+                #requirements:
+                #    id: '\d+'
