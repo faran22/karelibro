@@ -49,16 +49,16 @@ services:
     #App\Controller\ApiPlatformPersistersController: ~
     
     #Api platform Collection data
-    App\DataProvider\ApiPlatformCollectionProvider:
-        #class: App\DataProvider\ApiPlatformCollectionProvider # fix here
-        arguments:
-            $collectionExtensions: !tagged api_platform.doctrine.orm.query_extension.collection
-        #public: true
-    
-    #Api platform Item data
-    App\DataProvider\ApiPlatformItemProvider:
-        arguments:
-            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+    #App\DataProvider\ApiPlatformCollectionProvider:
+    #    #class: App\DataProvider\ApiPlatformCollectionProvider # fix here
+    #    arguments:
+    #        $collectionExtensions: !tagged api_platform.doctrine.orm.query_extension.collection
+    #    #public: true
+    #
+    ##Api platform Item data
+    #App\DataProvider\ApiPlatformItemProvider:
+    #    arguments:
+    #        $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
 
 
 

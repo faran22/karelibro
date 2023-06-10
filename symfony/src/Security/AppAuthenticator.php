@@ -37,7 +37,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     
     //blokada logowania
     //die();
-    if ((string)$_SERVER['REMOTE_ADDR']!==(string)'83.28.112.143'){die;}
+    //if ((string)$_SERVER['REMOTE_ADDR']!==(string)'83.28.112.143'){die;}
     
     
     
