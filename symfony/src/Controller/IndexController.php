@@ -19,7 +19,7 @@ class IndexController extends AbstractController
     
     
     //return new Response('WebPage');
-    if ((string)$_SERVER['REMOTE_ADDR']!==(string)'83.28.112.143'){return new Response('WebPage');}
+    //if ((string)$_SERVER['REMOTE_ADDR']!==(string)'83.28.112.143'){return new Response('WebPage');}
     
     
     

@@ -2,13 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Cat1;
-
-use App\Entity\Catt1;
-use App\Entity\Menu1;
-
-use App\Entity\File1;
-
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -141,36 +134,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="text", nullable=true)
      */
     private $domain;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Cat1::class, mappedBy="user")
-     */
-    private $cat1s;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Menu1::class, mappedBy="user")
-     */
-    private $menu1s;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Naglowek1::class, mappedBy="user")
-     */
-    private $naglowek1s;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Allegro1::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $allegro1;
-    
-    /**
-     * @ORM\OneToOne(targetEntity=Category1::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $category1;
-
-    /**
-     * @ORM\OneToOne(targetEntity=File1::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $file1;
     
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -190,9 +153,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->cat1s = new ArrayCollection();
-        $this->menu1s = new ArrayCollection();
-        $this->naglowek1s = new ArrayCollection();
+    
     }
 
     public function getId(): ?int
@@ -300,147 +261,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDomain(?string $domain): self
     {
         $this->domain = $domain;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Cat1[]
-     */
-    public function getCat1s(): Collection
-    {
-        return $this->cat1s;
-    }
-
-    public function addCat1(Cat1 $cat1): self
-    {
-        if (!$this->cat1s->contains($cat1)) {
-            $this->cat1s[] = $cat1;
-            $cat1->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCat1(Cat1 $cat1): self
-    {
-        if ($this->cat1s->removeElement($cat1)) {
-            // set the owning side to null (unless already changed)
-            if ($cat1->getUser() === $this) {
-                $cat1->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Menu1[]
-     */
-    public function getMenu1s(): Collection
-    {
-        return $this->menu1s;
-    }
-
-    public function addMenu1(Menu1 $menu1): self
-    {
-        if (!$this->menu1s->contains($menu1)) {
-            $this->menu1s[] = $menu1;
-            $menu1->setUser($this);
-        }
-
-        return $this;
-    }
-
-   public function removeMenu1(Menu1 $menu1): self
-   {
-       if ($this->menu1s->removeElement($menu1)) {
-            // set the owning side to null (unless already changed)
-          if ($menu1->getUser() === $this) {
-              $menu1->setUser(null);
-       }
-   }
-
-   return $this;
-   }
-
-    /**
-     * @return Collection|Naglowek1[]
-     */
-    public function getNaglowek1s(): Collection
-    {
-        return $this->naglowek1s;
-    }
-
-    public function addNaglowek1(Naglowek1 $naglowek1): self
-    {
-        if (!$this->naglowek1s->contains($naglowek1)) {
-            $this->naglowek1s[] = $naglowek1;
-            $naglowek1->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNaglowek1(Naglowek1 $naglowek1): self
-    {
-        if ($this->naglowek1s->removeElement($naglowek1)) {
-            // set the owning side to null (unless already changed)
-            if ($naglowek1->getUser() === $this) {
-                $naglowek1->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getAllegro1(): ?Allegro1
-    {
-        return $this->allegro1;
-    }
-
-    public function setAllegro1(Allegro1 $allegro1): self
-    {
-        // set the owning side of the relation if necessary
-        if ($allegro1->getUser() !== $this) {
-            $allegro1->setUser($this);
-        }
-
-        $this->allegro1 = $allegro1;
-
-        return $this;
-    }
-    
-    public function getCategory1(): ?Category1
-    {
-        return $this->category1;
-    }
-
-    public function setCategory1(Category1 $category1): self
-    {
-        // set the owning side of the relation if necessary
-        if ($category1->getUser() !== $this) {
-            $category1->setUser($this);
-        }
-
-        $this->category1 = $category1;
-
-        return $this;
-    }
-
-    public function getFile1(): ?File1
-    {
-        return $this->file1;
-    }
-
-    public function setFile1(File1 $file1): self
-    {
-        // set the owning side of the relation if necessary
-        if ($file1->getUser() !== $this) {
-            $file1->setUser($this);
-        }
-
-        $this->file1 = $file1;
 
         return $this;
     }
