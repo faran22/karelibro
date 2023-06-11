@@ -6,6 +6,16 @@ import { AppComponent } from './app.component';
 import { Test1Component } from './test1/test1.component';
 import { HomeComponent } from './home/home.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+
+import { HttpclientService } from './httpclient.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,9 +24,16 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    OAuthModule.forRoot(),
+    BrowserAnimationsModule,
+    MatProgressBarModule,
   ],
-  providers: [],
+  providers: [
+    //monitorowanie zapytan http, dodawanie Bearer dla klienta http
+    {provide:HTTP_INTERCEPTORS, useClass:HttpclientService, multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

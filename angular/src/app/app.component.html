@@ -1,3 +1,59 @@
-<a [routerLink]="['/']" [queryParams]="{}">home</a> | <a [routerLink]="['/test1']" [queryParams]="{}">test 1</a>
+
+                                              <ng-container *ngIf="mainservice.startPage, else loadPage">
+
+<div *ngIf="mainservice.Preload===true" class="fixed-top w-100" style="z-index:2000;">
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<a [routerLink]="['/']" [queryParams]="{}">home</a> | <a [routerLink]="['/test1']" [queryParams]="{'p1':0}">test 1</a>
 
 <router-outlet></router-outlet>
+
+                                              </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <ng-template #loadPage>
+
+                                        </ng-template>
