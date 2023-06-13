@@ -3,6 +3,7 @@ import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor } from "@angular/c
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { MainService } from './main.service';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class HttpclientService {
 
 
   constructor(
+    private oauthService: OAuthService,
     private mainservice: MainService,
   ) {
 
@@ -26,13 +28,19 @@ intercept(req: HttpRequest<any>,next: HttpHandler):Observable<HttpEvent<any>>{
         //adresy dla ktorych nie bedzie paska postepu ladowania strony
         var httpwait: string[] = ['upload1',];
 
+        //adresy dla ktorych zawsze bedzie dodwany Bearer
+        var urlBearer: string[] = ["tests",];
+
         //adres moze byc oddzielony / lub ?
-        let reqUrl=req.url.split('/');
+        let reqUrl=req.url.split(/[?\/]/); console.log('reqUrl',reqUrl);
 
         var obj: {[k: string]: any} = {};
 
 
-
+//dodawanie bearer okaziciel
+if ( this.oauthService.getAccessToken() && (urlBearer.includes(reqUrl[4]) || req.method!=='GET') ){
+obj['headers']=req.headers.set('Authorization','Bearer '+this.oauthService.getAccessToken());
+}
 
         if ( !httpwait.includes(reqUrl[4]) ){
 

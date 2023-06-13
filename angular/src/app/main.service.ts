@@ -72,6 +72,7 @@ if (newurl!==null){
 //console.log('parseURL',this.parseURL(newurl));
 
 array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=1&subcategory='));
+//array.push(this.http.get<any>(this.ApiUrl+'/api/tests?page=1'));
 
 }
 

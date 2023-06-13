@@ -1,0 +1,49 @@
+<div class="nav-scroller shadow-sm mb-3">
+  <nav class="nav nav-underline m-1" aria-label="Secondary navigation">
+
+<!-- jesli nie zalogowany lub w trakcie logowania, koniec logowania jest w momencie pobrania pliku UserInfo -->
+<div class="row g-1 flex-nowrap" *ngIf="(isAuthenticated$ | async) === false; else logoutButton">
+
+<div class="col-auto col-sm-8">
+<div class="input-group">
+  <input autocomplete="off" type="text" class="form-control" placeholder="" [(ngModel)]="userName" (keydown.enter)="loginWithPassword()">
+  <input autocomplete="off" type="password" class="form-control" placeholder="" [(ngModel)]="password" (keydown.enter)="loginWithPassword()">
+  <button type="submit" class="btn" (click)="loginWithPassword()">button 1</button>
+  <!--&nbsp;<button [routerLink]="urlparamsservice.domainHost ? ['/',urlparamsservice.domainHost,'accountregister1'] : ['/','accountregister1']" class="col-auto" type="submit" class="btn"  [ngClass]="[mainservice.wyglad.PodMenuButton.length!==0 ?mainservice.wyglad.PodMenuButton:'']">{{mainservice.wyglad.ButtonRegiterText}}</button>-->
+</div>
+</div>
+<!--  <div class="col-auto col-xs-2">
+    <input [(ngModel)]="userName" type="text" class="form-control" placeholder="Login">
+  </div>
+  <div class="col-auto">
+    <input [(ngModel)]="password" type="password" class="form-control" placeholder="Hasło">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary" (click)="loginWithPassword()">Zaloguj</button>
+  </div>-->
+
+  <!--<div class="col-auto">
+<button [routerLink]="urlparamsservice.domainHost ? ['/',urlparamsservice.domainHost,'accountregister1'] : ['/','accountregister1']" class="col-auto" type="submit" class="btn btn-primary">utwórz stronę internetową</button>
+  </div>-->
+</div>
+
+<ng-template #logoutButton>
+<div class="d-inline-block">
+<a href="javascript:void(0)" (click)="logout()">wyloguj {{ username }}</a>
+</div>
+</ng-template>
+
+<!--    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+    <a class="nav-link" href="#">
+      Friends
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">27</span>
+    </a>
+    <a class="nav-link" href="#">Explore</a>
+    <a class="nav-link" href="#">Suggestions</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>-->
+  </nav>
+</div>

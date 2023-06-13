@@ -14,13 +14,15 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     Test1Component,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     OAuthModule.forRoot(),
     BrowserAnimationsModule,
     MatProgressBarModule,
+    FormsModule,
   ],
   providers: [
     //monitorowanie zapytan http, dodawanie Bearer dla klienta http
