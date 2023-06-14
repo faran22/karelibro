@@ -32,7 +32,7 @@ intercept(req: HttpRequest<any>,next: HttpHandler):Observable<HttpEvent<any>>{
         var urlBearer: string[] = ["tests",];
 
         //adres moze byc oddzielony / lub ?
-        let reqUrl=req.url.split(/[?\/]/); console.log('reqUrl',reqUrl);
+        let reqUrl=req.url.split(/[?\/]/); //console.log('reqUrl',reqUrl);
 
         var obj: {[k: string]: any} = {};
 

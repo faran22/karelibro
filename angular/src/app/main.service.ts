@@ -1,9 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import { Subscription, forkJoin, interval } from 'rxjs';
+import { Subscription, forkJoin, interval, of } from 'rxjs';
 import { Router, UrlTree, DefaultUrlSerializer } from '@angular/router';
 import {HttpClient} from "@angular/common/http";
-import { take } from 'rxjs/operators';
+import { take, catchError } from 'rxjs/operators';
 import { DOCUMENT, PlatformLocation } from'@angular/common';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -60,19 +63,32 @@ let array = [];
 //pobieranie startowych danych z serwera rest api
 if (this.startPage===false){
 
-array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=1&subcategory='));
+array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=111111&subcategory=').pipe(catchError(error => of(/*error*/'error'))));
+array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=222222&subcategory=').pipe(catchError(error => of(/*error*/'error'))));
 
 }
 
 
 
-
+//jesli istnieje nowy url to odczyt parametrów strony i tworzenie zapytania rest api
 if (newurl!==null){
 
-//console.log('parseURL',this.parseURL(newurl));
+let wstaw:string='';
+let url = this.parseURL(newurl);
 
-array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=1&subcategory='));
-//array.push(this.http.get<any>(this.ApiUrl+'/api/tests?page=1'));
+//jeśli podstrony
+if (url.queryParams['p1']!==undefined){wstaw+='&category='+url.queryParams['p1'];}
+if (url.queryParams['p2']!==undefined){wstaw+='&subcategory='+url.queryParams['p2'];}
+//jesli strona główna
+if (wstaw.length===0){wstaw='&category=1';}
+
+//jeśli podstrona 2 to dodanie dodatkowych url rest api
+if (url.queryParams['p1']!==undefined && Number(url.queryParams['p1'])===Number(2)){
+array.push(this.http.get<any>(this.ApiUrl+'/api/tests?page=1').pipe(catchError(error => of(/*error*/'error'))));
+}
+
+
+array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1'+wstaw).pipe(catchError(error => of(/*error*/'error'))));
 
 }
 
@@ -86,6 +102,11 @@ array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=1&subcateg
 
 
 
+this.subscriptions[0]=(
+forkJoin(array).subscribe(res => this.handleResponse(res,newurl))
+);
+
+/*
       //this.subscriptions.push(this.http.get<any>(dane)
       this.subscriptions[0]=(
               forkJoin(array)
@@ -108,21 +129,44 @@ array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1&category=1&subcateg
                 console.log('this.pageBufor',this.pageBufor);
 
                 this.przenikanie(newurl);
-                                            //this.pageBufor=undefined;
-
-
 
             },
                       (error) => {
-                        this.pageBufor=undefined;
+                        
+                        console.log('error',error);
+                        //this.pageBufor=undefined;
+                        this.przenikanie(newurl);
                         //this.message(3,this.wyglad.ErrorWiadomosc);
 
                       }
             )
 
       );
+*/
 
+}
+//przetwarzanie odpowiedzi zwroconej z serwera rest api
+public handleResponse(res:any, newurl:string|null):void{
+    
+              //jesli dane startowe po pierwszym wczytaniu strony
+              if (this.startPage===false){
 
+                //pierwszy element tablicy
+                //console.log('res[0]',res[0]);
+                res.shift();
+
+                //drugi element tablicy
+                //console.log('res[0]',res[0]);
+                res.shift();
+
+              }
+
+              this.pageBufor=res;
+
+                if (this.pageBufor===null || this.pageBufor.length===0 || this.pageBufor[0]===undefined){this.pageBufor=undefined;}
+                console.log('this.pageBufor',this.pageBufor);
+
+                this.przenikanie(newurl);
 }
 private przeikanie0:boolean=false;
 //private przenikanie0stop:boolean=false;

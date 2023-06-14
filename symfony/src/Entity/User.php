@@ -113,11 +113,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
-    
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $personaldata = [];
 
     /**
      * @var string The hashed password
@@ -134,22 +129,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="text", nullable=true)
      */
     private $domain;
-    
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    #[Groups(groups: ['user:collection:get'])]
-    private $connecteddomain;
-    
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $size;
-    
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $page;
+
 
     public function __construct()
     {
@@ -265,52 +245,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     
-    public function getPersonaldata(): ?array
-    {
-        return $this->personaldata;
-    }
-
-    public function setPersonaldata(?array $personaldata): self
-    {
-        $this->personaldata = $personaldata;
-
-        return $this;
-    }
     
-    public function getConnecteddomain(): ?string
-    {
-        return $this->connecteddomain;
-    }
-
-    public function setConnecteddomain(string|null $connecteddomain): self
-    {
-        $this->connecteddomain = $connecteddomain;
-
-        return $this;
-    }
-    
-    public function getSize(): int
-    {
-        return $this->size;
-    }
-
-    public function setSize(int $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-    
-    public function getPage(): int
-    {
-        return $this->page;
-    }
-
-    public function setPage(int $page): self
-    {
-        $this->page = $page;
-
-        return $this;
-    }
 
 }
