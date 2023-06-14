@@ -87,7 +87,7 @@ if (url.queryParams['p1']!==undefined && Number(url.queryParams['p1'])===Number(
 array.push(this.http.get<any>(this.ApiUrl+'/api/tests?page=1').pipe(catchError(error => of(/*error*/'error'))));
 }
 
-
+//główne zapytanie rest api
 array.push(this.http.get<any>(this.ApiUrl+'/api/pages?page=1'+wstaw).pipe(catchError(error => of(/*error*/'error'))));
 
 }
