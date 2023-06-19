@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'test1', component: Test1Component},
+  //{ path: '', loadChildren: () => TestModule },
 ];
 
 @NgModule({

@@ -13,9 +13,19 @@ import { HttpclientService } from './httpclient.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//swiper
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+
+//import { SwiperModule } from 'swiper/angular';
+//import {register} from 'swiper/element/bundle';
+//register();
+import {register} from 'swiper/element/bundle';
+register();
+
 
 @NgModule({
   declarations: [
@@ -32,11 +42,13 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatProgressBarModule,
     FormsModule,
+    //SwiperModule,
   ],
   providers: [
     //monitorowanie zapytan http, dodawanie Bearer dla klienta http
     {provide:HTTP_INTERCEPTORS, useClass:HttpclientService, multi:true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
