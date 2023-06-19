@@ -15,16 +15,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //swiper
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {register} from 'swiper/element/bundle';
+register();
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 
-//import { SwiperModule } from 'swiper/angular';
-//import {register} from 'swiper/element/bundle';
-//register();
-import {register} from 'swiper/element/bundle';
-register();
+
 
 
 @NgModule({
