@@ -21,6 +21,7 @@ register();
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { Menu1Component } from './menu1/menu1.component';
 
 
 
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     Test1Component,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    Menu1Component
   ],
   imports: [
     BrowserModule,

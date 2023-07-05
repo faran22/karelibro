@@ -150,6 +150,10 @@ public handleResponse(res:any, newurl:string|null):void{
     
               //jesli dane startowe po pierwszym wczytaniu strony
               if (this.startPage===false){
+                  
+
+
+
 
                 //pierwszy element tablicy
                 //console.log('res[0]',res[0]);
@@ -237,7 +241,22 @@ public przenikanie(newurl:string|null):void{
 
       //jesli bylo sciemnianie
       if (this.przeikanie0===false){
+          
+if (this.startPage===false){
+//setTimeout(()=>{
+                  //ładowanie javascript od rozwijanego menu 
+                  //console.log('startPage');
+                  const body = <HTMLDivElement> document.body;
+                  const script = document.createElement('script');
+                    script.innerHTML = '';
+                    script.src = '/assets/prosidebar.js';
+                    script.async = false;
+                    script.defer = true;
+                    body.appendChild(script);
+//}, 10);
         this.startPage=true;
+}
+
         if (newurl!==null){this.router.navigateByUrl(newurl,{skipLocationChange: false});}
         this.document.body.style.display="none";
         this.przeikanie0=true;
