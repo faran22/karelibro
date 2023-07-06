@@ -675,10 +675,11 @@
   box-sizing: border-box;
 }
 
+/*
 body {
   margin: 0;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #3f4750;
   font-size: 0.9rem;
 }
@@ -686,8 +687,8 @@ body {
 a {
   text-decoration: none;
 }
-
-@media (max-width: 992px) {
+*/
+@media (max-width: 576px) {
   #btn-collapse {
     display: none;
   }
